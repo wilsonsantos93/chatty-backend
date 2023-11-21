@@ -5,7 +5,7 @@
     "lib": ["DOM", "ES2015"],
     "baseUrl": ".",
     "outDir": "./build",
-    "rootDir": "src",
+    "rootDir": ".",
     "strict": true,
     "noImplicitAny": true,
     "noUnusedLocals": false,
@@ -21,7 +21,7 @@
     "resolveJsonModule": true,
     "plugins": [
       { "transform": "typescript-transform-paths" },
-      { "transform": "typescript-transform-paths", "afterDeclarations": true }
+      { "transform": "typescript-transform-paths", "afterDeclarations": true },
     ],
     "paths": {
       "@auth/*": ["src/features/auth/*"],
