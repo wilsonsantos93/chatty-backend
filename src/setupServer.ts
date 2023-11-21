@@ -7,11 +7,11 @@ import cookieSession from 'cookie-session';
 import HTTP_STATUS from 'http-status-codes';
 import 'express-async-errors';
 import compression from 'compression';
-import config from './config';
+import config from '@root/config';
+import applicationRoutes from '@root/routes';
 import { Server } from 'socket.io';
 import { createClient } from 'redis';
 import { createAdapter } from '@socket.io/redis-adapter';
-import applicationRoutes from './routes';
 import { CustomError, IErrorResponse } from './shared/globals/helpers/error-handler';
 import Logger from 'bunyan';
 
@@ -74,6 +74,7 @@ class ChattyServer {
       if (error instanceof CustomError) {
         return res.status(error.statusCode).json(error.serializeErrors());
       }
+      next();
     });
   }
 
@@ -104,7 +105,9 @@ class ChattyServer {
     return io;
   }
 
-  private socketIOConnection(io: Server): void {}
+  private socketIOConnection(io: Server): void {
+    log.info('socketIOConnection');
+  }
 
   private startHttpServer(httpServer: http.Server): void {
     log.info('Server has started with PID', process.pid);
